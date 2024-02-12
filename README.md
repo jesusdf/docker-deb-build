@@ -1,2 +1,4 @@
 # docker-deb-build
-Docker image to build a debian package
+Debian based image (stable-slim) to build a debian package.
+
+Mount your package folder over /usr/src. On start it will exec /usr/src/build.sh

@@ -1,0 +1,14 @@
+version: '2'
+services:
+  huawei-vpn-client:
+    image: jesusdf/docker-deb-build
+    container_name: docker-deb-build
+    environment:
+      - USER=root
+      - TZ=Europe/Madrid
+    volume:
+      - /home/user/src/deb/mypackage:/usr/src
+      - /home/user/src/deb/mypackage/my-build-script.sh:/usr/src/build.sh
+    #logging:
+    #  driver: none
+    restart: unless-stopped
