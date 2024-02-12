@@ -59,7 +59,7 @@ jobs:
       - name: Update Docker Hub Description
         uses: peter-evans/dockerhub-description@v3
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
           repository: ${{ github.repository_owner }}/docker-deb-build
           readme-filepath: ./README.md
