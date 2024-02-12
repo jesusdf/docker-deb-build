@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   equivs \
   rsync \
   locales \
-  wget gcc build-essential fakeroot git tar grep sed libncurses5-dev kernel-package \
+  wget gcc build-essential fakeroot git tar grep sed libncurses5-dev \
   libssl-dev libelf-dev bison flex time \
   dh-make nasm yasm \
   && apt-get clean \
