@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 VOLUME /usr/src
 WORKDIR /usr/src
 
-ENTRYPOINT ["/usr/src/build.sh"]
+ENTRYPOINT [ "/bin/bash", "build.sh" ]
 
 # https://github.com/opencontainers/image-spec/blob/master/spec.md
 LABEL org.opencontainers.image.title='docker-deb-build' \
