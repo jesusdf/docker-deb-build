@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   wget gcc build-essential fakeroot git tar grep sed libncurses5-dev \
   libssl-dev libelf-dev bison flex time \
   dh-make nasm yasm \
-  curl tar git ca-certificates docker.io default-jdk maven \
+  curl tar git ca-certificates docker.io default-jdk icu-devtools libicu76 libicu4j-java libicu-dev maven \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -34,6 +34,10 @@ WORKDIR /build
 RUN curl -LsS \
       https://download.agent.dev.azure.com/agent/${AGENT_VERSION}/vsts-agent-linux-x64-${AGENT_VERSION}.tar.gz \
     | tar -xz --no-same-owner
+
+# The current version of the agent supports up to libicu74.
+# debian 13 comes with libicu76.
+RUN sed -i 's/libicu74/libicu76/g' /build/bin/installdependencies.sh
 
 RUN /build/bin/installdependencies.sh
 
