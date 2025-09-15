@@ -5,10 +5,12 @@ ARG COMMIT_SHA
 
 # Azure DevOps Agent support adapted from https://github.com/tdevere/DevOpsAgentPoolLinux
 
-ARG AGENT_VERSION=4.255.0
+# https://github.com/microsoft/azure-pipelines-agent/releases
+ARG AGENT_VERSION=4.262.0
+
 ENV AGENT_VERSION=${AGENT_VERSION} \
-    JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64 \
-    JAVA_HOME_11_X64=/usr/lib/jvm/java-11-openjdk-amd64 \
+    JAVA_HOME=/usr/lib/jvm/default-java \
+    JAVA_HOME_11_X64=/usr/lib/jvm/default-java \
     MAVEN_HOME=/usr/share/maven \
     M2_HOME=/usr/share/maven \
     PATH=${PATH}:${MAVEN_HOME}/bin
@@ -22,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   wget gcc build-essential fakeroot git tar grep sed libncurses5-dev \
   libssl-dev libelf-dev bison flex time \
   dh-make nasm yasm \
-  curl tar git ca-certificates docker.io openjdk-11-jdk-headless maven \
+  curl tar git ca-certificates docker.io default-jdk maven \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
