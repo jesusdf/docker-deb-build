@@ -1,14 +1,25 @@
-version: '2'
+
 services:
-  huawei-vpn-client:
+  deb-build:
     image: jesusdf/docker-deb-build
-    container_name: docker-deb-build
+    container_name: deb-build
     environment:
-      - USER=root
+      - USER=agent
       - TZ=Europe/Madrid
+      # If you want to use Azure DevOps Agent, you need to setup these variables
+      - AZ_URL="${AZ_URL}"
+      - AZ_POOL="${AZ_POOL}"
+      - AZ_AGENT_NAME="${AZ_AGENT_NAME}"
+      - AZ_AUTH_TYPE="${AZ_AUTH_TYPE:PAT}"
+      - AZ_TOKEN="${AZ_TOKEN}"
+      - AZ_USER="${AZ_USER}"
+      - AZ_PASS="${AZ_PASS}"
+      - AZ_WORK="_work"
     volume:
-      - /home/user/src/deb/mypackage:/usr/src
-      - /home/user/src/deb/mypackage/my-build-script.sh:/usr/src/build.sh
-    #logging:
-    #  driver: none
+      - /home/user/src/deb/mypackage/output:/build/_work                  # Azure DevOps Agent persistent output directory
+      - /home/user/src/deb/mypackage/my-build-script.sh:/build/build.sh   # Your custom build script
+      - /home/user/src/deb/mypackage/src:/build/src                       # Any folder with the source you want to build (if you don't use the Azure DevOps Agent)
+    logging:
+      options:
+        max-size: 10m
     restart: unless-stopped
