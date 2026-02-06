@@ -50,8 +50,8 @@ RUN useradd --create-home agent \
     && chown -R agent:agent /usr/local/share/ca-certificates/custom-ca
 
 RUN echo "Cmnd_Alias UPDATECA = /usr/sbin/update-ca-certificates" >> /etc/sudoers \
-    echo "%sudo ALL=NOPASSWD: UPDATECA" >> /etc/sudoers \
-    addgroup agent sudo
+    && echo "%sudo ALL=NOPASSWD: UPDATECA" >> /etc/sudoers \
+    && addgroup agent sudo
 
 COPY ./*.sh /build/
 RUN chmod +x /build/*.sh \
