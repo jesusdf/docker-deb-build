@@ -43,12 +43,15 @@ RUN sed -i 's/libicu74/libicu76/g' /build/bin/installdependencies.sh
 RUN /build/bin/installdependencies.sh
 
 RUN useradd --create-home agent \
-    && addgroup agent sudo \
     && mkdir -p /build/_work /build/_tool \
     && usermod -aG docker agent \
+    && usermod -aG sudo agent \
     && chown -R agent:agent /build \
     && mkdir -p /usr/local/share/ca-certificates/custom-ca \
     && chown -R agent:agent /usr/local/share/ca-certificates/custom-ca
+
+RUN echo "Cmnd_Alias UPDATECA = /usr/sbin/update-ca-certificates" >> /etc/sudoers \
+    && echo "%sudo ALL=NOPASSWD: UPDATECA" >> /etc/sudoers
 
 COPY ./*.sh /build/
 RUN chmod +x /build/*.sh \
