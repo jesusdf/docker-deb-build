@@ -2,8 +2,13 @@
 
 set -euo pipefail
 
-if [ -z "${AZ_URL:-}" ] then
+if [ -z "${AZ_URL:-}" ]; then
   echo "ERROR: AZ_URL must be set"
+  exit 1
+fi
+
+if [ -z "${AZ_AUTH_TYPE:-}" ]; then
+  echo "ERROR: AZ_AUTH_TYPE must be set"
   exit 1
 fi
 
@@ -60,9 +65,9 @@ cleanup() {
 # pat - Personal Access Token
 # alt - Basic Authentication
 
-cleanup();
+cleanup
 
-echo ">> Configuring Azure DevOps Agent..."
+echo ">> Configuring Azure DevOps Agent...";
 
 if [ "${AZ_AUTH_TYPE:-}"=="pat" ]; then
     # Token Authentication
