@@ -4,7 +4,7 @@ set -euo pipefail
 
 cd /build
 
-if [ ! -z "${AZ_URL:-}" ] then
+if [ ! -z "${AZ_URL:-}" ]; then
   # Azure DevOps Agent build
   exit $(./agent.sh)
 else
