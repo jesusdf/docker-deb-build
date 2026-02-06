@@ -57,8 +57,6 @@ COPY ./*.sh /build/
 RUN chmod +x /build/*.sh \
     && chown agent:agent /build/*.sh
 
-RUN /build/setupsudo.sh
-
 USER agent
 
 ENTRYPOINT ["/build/entrypoint.sh"]

@@ -18,6 +18,7 @@ services:
     volume:
       - /home/user/src/deb/mypackage/output:/build/_work                  # Azure DevOps Agent persistent output directory
       - /home/user/src/deb/mypackage/my-build-script.sh:/build/build.sh   # Your custom build script
+      - /home/user/src/deb/mypackage/cert.crt:/build/cert.crt             # Your custom CA certificate for the Azure DevOps Server validation
       - /home/user/src/deb/mypackage/src:/build/src                       # Any folder with the source you want to build (if you don't use the Azure DevOps Agent)
     logging:
       options:
