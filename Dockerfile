@@ -25,6 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libssl-dev libelf-dev bison flex time \
   dh-make nasm yasm \
   curl tar git ca-certificates docker.io default-jdk icu-devtools libicu76 libicu4j-java libicu-dev maven \
+  sudo \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -44,7 +45,13 @@ RUN /build/bin/installdependencies.sh
 RUN useradd --create-home agent \
     && mkdir -p /build/_work /build/_tool \
     && usermod -aG docker agent \
-    && chown -R agent:agent /build
+    && chown -R agent:agent /build \
+    && mkdir -p /usr/local/share/ca-certificates/custom-ca \
+    && chown -R agent:agent /usr/local/share/ca-certificates/custom-ca
+
+RUN echo "Cmnd_Alias UPDATECA = /usr/sbin/update-ca-certificates" >> /etc/sudoers \
+    echo "%sudo ALL=NOPASSWD: UPDATECA" >> /etc/sudoers \
+    addgroup agent sudo
 
 COPY ./*.sh /build/
 RUN chmod +x /build/*.sh \
