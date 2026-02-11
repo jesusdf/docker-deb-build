@@ -12,8 +12,8 @@ fi
 
 if [ ! -z "${AZ_URL:-}" ]; then
   # Azure DevOps Agent build
-  exit $(./agent.sh)
+  bash agent.sh
 else
   # Custom build
-  exit $(./build.sh)
+  bash build.sh
 fi

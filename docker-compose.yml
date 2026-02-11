@@ -10,11 +10,10 @@ services:
       - AZ_URL="${AZ_URL}"
       - AZ_POOL="${AZ_POOL}"
       - AZ_AGENT_NAME="${AZ_AGENT_NAME}"
-      - AZ_AUTH_TYPE="${AZ_AUTH_TYPE:PAT}"
+      - AZ_AUTH_TYPE="${AZ_AUTH_TYPE:pat}"
       - AZ_TOKEN="${AZ_TOKEN}"
       - AZ_USER="${AZ_USER}"
       - AZ_PASS="${AZ_PASS}"
-      - AZ_WORK="_work"
     volume:
       - /home/user/src/deb/mypackage/output:/build/_work                  # Azure DevOps Agent persistent output directory
       - /home/user/src/deb/mypackage/my-build-script.sh:/build/build.sh   # Your custom build script
