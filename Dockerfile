@@ -1,4 +1,5 @@
-FROM debian:stable-slim
+#FROM debian:stable-slim
+FROM mcr.microsoft.com/dotnet/sdk:8.0-bookworm-slim
 
 ARG BUILD_DATE
 ARG COMMIT_SHA
