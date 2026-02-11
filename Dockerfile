@@ -1,5 +1,5 @@
 #FROM debian:stable-slim
-FROM mcr.microsoft.com/dotnet/sdk:8.0-bookworm-slim
+FROM mcr.microsoft.com/dotnet/sdk:8.0-noble
 
 ARG BUILD_DATE
 ARG COMMIT_SHA
@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   wget gcc build-essential fakeroot git tar grep sed libncurses5-dev \
   libssl-dev libelf-dev bison flex time \
   dh-make nasm yasm \
-  curl tar git ca-certificates docker.io default-jdk icu-devtools libicu76 libicu4j-java libicu-dev maven \
+  curl tar git ca-certificates docker.io default-jdk icu-devtools libicu74 libicu4j-java libicu-dev maven \
   sudo \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
@@ -39,7 +39,9 @@ RUN curl -LsS \
 
 # The current version of the agent supports up to libicu74.
 # debian 13 comes with libicu76.
-RUN sed -i 's/libicu74/libicu76/g' /build/bin/installdependencies.sh
+# debian 12 comes with libicu72.
+# ubuntu noble comes with libicu74
+#RUN sed -i 's/libicu74/libicu76/g' /build/bin/installdependencies.sh
 
 RUN /build/bin/installdependencies.sh
 
