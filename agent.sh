@@ -41,8 +41,7 @@ cleanup() {
             --token "$AZ_TOKEN"
 
         # clean up any leftover state
-        rm -rf externals .credentials .agent
-        #cd _work && rm -rf * && cd ..
+        rm -rf .credentials .agent
     
     else
 
@@ -53,8 +52,7 @@ cleanup() {
             --password "$AZ_PASS"
 
         # clean up any leftover state
-        rm -rf externals .credentials .agent
-        #cd _work && rm -rf * && cd ..
+        rm -rf .credentials .agent
         
     fi
   fi
