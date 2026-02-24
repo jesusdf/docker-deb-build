@@ -10,8 +10,10 @@ if [ -f cert.crt ]; then
   sudo update-ca-certificates
 fi
 
-if [ $( ps aux | grep dockerd | grep -v grep | wc -l ) -eq 0 ]; then
-  sudo systemctl start docker
+if [ -f /var/run/docker.sock ]; then
+  # Fix group id so it matches the host docker socket permissions
+  NEWGID=$(stat -c '%g' /var/run/docker.sock)
+  sudo groupmod -g $NEWGID docker
 fi
 
 if [ ! -z "${AZ_URL:-}" ]; then
