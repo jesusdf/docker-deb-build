@@ -15,6 +15,7 @@ services:
       - AZ_USER="${AZ_USER}"
       - AZ_PASS="${AZ_PASS}"
     volume:
+      - /var/run/docker.sock:/var/run/docker.sock
       - /home/user/src/deb/mypackage/output:/build/_work                  # Azure DevOps Agent persistent output directory
       - /home/user/src/deb/mypackage/my-build-script.sh:/build/build.sh   # Your custom build script
       - /home/user/src/deb/mypackage/cert.crt:/build/cert.crt             # Your custom CA certificate for the Azure DevOps Server validation

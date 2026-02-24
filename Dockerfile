@@ -53,7 +53,7 @@ RUN useradd --create-home agent \
     && mkdir -p /usr/local/share/ca-certificates/custom-ca \
     && chown -R agent:agent /usr/local/share/ca-certificates/custom-ca
 
-RUN echo "Cmnd_Alias UTILS = /usr/sbin/update-ca-certificates, /usr/sbin/groupmod" >> /etc/sudoers \
+RUN echo "Cmnd_Alias UTILS = /usr/sbin/update-ca-certificates, /usr/sbin/groupmod, /usr/bin/docker" >> /etc/sudoers \
     && echo "%sudo ALL=NOPASSWD: UTILS" >> /etc/sudoers
 
 COPY ./*.sh /build/
