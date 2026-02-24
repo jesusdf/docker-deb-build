@@ -53,8 +53,10 @@ RUN useradd --create-home agent \
     && mkdir -p /usr/local/share/ca-certificates/custom-ca \
     && chown -R agent:agent /usr/local/share/ca-certificates/custom-ca
 
-RUN echo "Cmnd_Alias UPDATECA = /usr/sbin/update-ca-certificates" >> /etc/sudoers \
-    && echo "%sudo ALL=NOPASSWD: UPDATECA" >> /etc/sudoers
+RUN systemctl enable docker
+
+RUN echo "Cmnd_Alias UTILS = /usr/sbin/update-ca-certificates, /usr/bin/systemctl" >> /etc/sudoers \
+    && echo "%sudo ALL=NOPASSWD: UTILS" >> /etc/sudoers
 
 COPY ./*.sh /build/
 RUN chmod +x /build/*.sh \

@@ -10,6 +10,10 @@ if [ -f cert.crt ]; then
   sudo update-ca-certificates
 fi
 
+if [ $( ps aux | grep dockerd | grep -v grep | wc -l ) -eq 0 ]; then
+  sudo systemctl start docker
+fi
+
 if [ ! -z "${AZ_URL:-}" ]; then
   # Azure DevOps Agent build
   bash agent.sh
