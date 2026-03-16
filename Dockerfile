@@ -39,7 +39,7 @@ RUN curl -LsS \
 
 RUN curl -LsS -o tee.zip \
     https://github.com/microsoft/team-explorer-everywhere/releases/download/14.139.0/TEE-CLC-14.139.0.zip \
-    unzip tee.zip && mv TEE* /build/externals/tee && rm -f tee.zip
+    && unzip tee.zip && mv TEE* /build/externals/tee && rm -f tee.zip
 
 # The current version of the agent supports up to libicu74.
 # debian 13 comes with libicu76.
