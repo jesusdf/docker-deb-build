@@ -26,16 +26,20 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libssl-dev libelf-dev bison flex time \
   dh-make nasm yasm \
   curl tar git ca-certificates docker.io default-jdk icu-devtools libicu74 libicu4j-java libicu-dev maven \
-  sudo \
+  sudo unzip \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir /build
+RUN mkdir -p /build/externals
 WORKDIR /build
 
 RUN curl -LsS \
       https://download.agent.dev.azure.com/agent/${AGENT_VERSION}/vsts-agent-linux-x64-${AGENT_VERSION}.tar.gz \
     | tar -xz --no-same-owner
+
+RUN curl -LsS -o tee.zip \
+    https://github.com/microsoft/team-explorer-everywhere/releases/download/14.139.0/TEE-CLC-14.139.0.zip \
+    unzip tee.zip && mv TEE* /build/externals/tee && rm -f tee.zip
 
 # The current version of the agent supports up to libicu74.
 # debian 13 comes with libicu76.

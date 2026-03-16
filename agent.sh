@@ -27,6 +27,7 @@ fi
 # Default values
 AZ_POOL=${AZ_POOL:-Default}
 AZ_AGENT_NAME=${AZ_AGENT_NAME:-$(hostname)}
+DISABLE_TEE_PLUGIN_REMOVAL=true
 
 cleanup() {
 
@@ -77,7 +78,7 @@ if [ "${AZ_AUTH_TYPE:-}"=="pat" ]; then
     --token "$AZ_TOKEN" \
     --pool  "$AZ_POOL" \
     --agent "$AZ_AGENT_NAME" \
-    --acceptTeeEula
+    --acceptTeeEula --replace
 else
     # Username and password authentication
     ./config.sh --unattended \
@@ -87,7 +88,7 @@ else
     --password "$AZ_PASS" \
     --pool  "$AZ_POOL" \
     --agent "$AZ_AGENT_NAME" \
-    --acceptTeeEula
+    --acceptTeeEula --replace
 fi
 
 # Graceful cleanup on termination signals
