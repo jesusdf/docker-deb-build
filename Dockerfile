@@ -7,7 +7,7 @@ ARG COMMIT_SHA
 # Azure DevOps Agent support adapted from https://github.com/tdevere/DevOpsAgentPoolLinux
 
 # https://github.com/microsoft/azure-pipelines-agent/releases
-ARG AGENT_VERSION=4.268.0
+ARG AGENT_VERSION=4.271.0
 
 ENV AGENT_VERSION=${AGENT_VERSION} \
     JAVA_HOME=/usr/lib/jvm/default-java \
@@ -62,7 +62,8 @@ RUN echo "Cmnd_Alias UTILS = /usr/sbin/update-ca-certificates, /usr/sbin/groupmo
 
 COPY ./*.sh /build/
 RUN chmod +x /build/*.sh \
-    && chown agent:agent /build/*.sh
+    && chown agent:agent /build/*.sh \
+    && chown -R root:root /build/externals/tee
 
 USER agent
 

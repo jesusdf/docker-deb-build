@@ -28,6 +28,7 @@ fi
 AZ_POOL=${AZ_POOL:-Default}
 AZ_AGENT_NAME=${AZ_AGENT_NAME:-$(hostname)}
 DISABLE_TEE_PLUGIN_REMOVAL=true
+AZP_AGENT_DOWNGRADE_DISABLED=true
 
 cleanup() {
 
