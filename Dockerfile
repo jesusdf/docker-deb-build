@@ -27,8 +27,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   dh-make nasm yasm \
   curl tar git ca-certificates docker.io default-jdk icu-devtools libicu74 libicu4j-java libicu-dev maven \
   sudo unzip \
+  python3 python3-venv python3-pip pipx libffi-dev \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
+
+# Some packages that are needed to build documentation
+RUN pip install --break-system-packages pyyaml markdown reportlab requests requests-ntlm
 
 RUN mkdir -p /build/externals
 WORKDIR /build
